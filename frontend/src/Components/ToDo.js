@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import {Button, Form} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
+import {GoPlus} from 'react-icons/go'
 import { addtodos, completed, deletetodo, updatetodo } from '../Services/Actions/action'
+import DisplayTodos from './DisplayTodos'
 function ToDo() {
     const inputref=useRef(true)
     const store = useSelector(state=>state.Todos)
@@ -41,17 +43,18 @@ function ToDo() {
     }
     
   return (
-    <div className='mb-3'>
-        <Form onSubmit={handelSubmit}>
+    <div className='.addTodos'>
+        <Form onSubmit={handelSubmit} className='addTodos'>
         <Form.Group className="mb-3" controlId="formBasicEmail">
         
-        <Form.Control type="text" placeholder="Enter email" onChange={handelchange} />
+        <Form.Control type="text" placeholder="" onChange={handelchange} className="todo-input" />
         
       </Form.Group>
-      <Button variant="primary" type="submit" >
-        add
+      <Button  type="submit" className='add-btn' >
+        <GoPlus/>
       </Button>
         </Form>
+        <DisplayTodos/>
        
     </div>
   )

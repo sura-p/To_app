@@ -1,5 +1,7 @@
 const initialState ={
-        todos:[]
+        todos:[],
+        users:[],
+        
 }
 
  export function FETCH (state=initialState,action){
@@ -60,6 +62,13 @@ const initialState ={
                     ...state,
                     todos:completed
                 }
+
+                case "SIGN_UP":
+                    return{
+                        ...state,
+                        users:[...state.users,action.payload.data]
+                    }
+               
          default:
              return state
      }

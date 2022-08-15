@@ -27,3 +27,9 @@ export const completed = (id)=>{
 
   }
 }
+
+export const signup = (data)=>{
+  return (dispatch)=>{
+  dispatch({ type: 'SIGN_UP' ,payload:{data}});
+  }
+}
