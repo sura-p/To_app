@@ -1,0 +1,39 @@
+import React, { useRef } from 'react'
+import { Button, Form } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
+import { completed, deletetodo, updatetodo } from '../Services/Actions/action'
+
+function ToDoitems(props) {
+    const inputref=useRef(true)
+
+    const dispatch = useDispatch()
+
+    const update=(id,value,e)=>{
+        if(e.which===13){
+            dispatch(updatetodo(id,value))
+            inputref.current.disabled=true;
+        }
+    }
+
+    const changefocus =()=>{
+        inputref.current.disabled=false;
+        inputref.current.focus()
+    }
+
+    const handeldelete=(id)=>{
+       
+        dispatch(deletetodo(id))
+    }
+
+    const handelcomplete=(id)=>{
+        dispatch(completed(id));
+
+    }
+  return (
+    <li key={props.item.id}> <Form.Control as="textarea" rows={3} ref={inputref}  disabled={inputref} defaultValue={props.item.todo} onKeyPress={(e)=>update(props.item.id,inputref.current.value,e)}/><Button type='submit' onClick={changefocus}>Edit</Button>
+            <Button type='submit' onClick={()=>handelcomplete(props.item.id)}>Complete</Button>
+            <Button type='submit' onClick={()=>handeldelete(props.item.id)}>Delete</Button></li>
+  )
+}
+
+export default ToDoitems
